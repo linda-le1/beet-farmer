@@ -6,6 +6,8 @@ gem 'sinatra', require: 'sinatra/base'
 gem 'puma'
 gem 'rake'
 gem 'bundler'
+gem 'activesupport'
+gem 'rack'
 
 
 

@@ -11,7 +11,6 @@ gem 'rack'
 gem 'sinatra-activerecord'
 
 
-
 group :test, :development do
   gem 'pry'
   gem 'rack-test'

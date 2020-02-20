@@ -1,2 +1,2 @@
 require 'sinatra/activerecord/rake'
-require './app'
+require './beet_farmer.rb'

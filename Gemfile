@@ -5,7 +5,6 @@ ruby '2.5.1'
 gem 'sinatra', require: 'sinatra/base'
 gem 'puma'
 gem 'rake'
-gem 'thin'
 gem 'bundler'
 
 

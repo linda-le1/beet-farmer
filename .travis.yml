@@ -1,10 +1,17 @@
 language: ruby
-
 rvm:
- - 2.5.1
-
+- 2.5.1
+before_install:
+- gem install bundler -v 2.1.4
 script:
- - bundle install - jobs=3 - retry=3
- - bundle exec rake db:create
- - bundle exec rake db:migrate
- - bundle exec rspec
+- bundle exec rspec
+- bundle exec rake db:migrate RAILS_ENV=test
+services:
+- postgresql
+deploy:
+  provider: heroku
+  api_key:
+    secure: RQLs89BqhUH1HsmHXBDBEOupF+bXA/KvxBGbwPtyLMVfC3hkUIvI038UHCXIX9c0J/82C/1h4I11S/rez0N2zbAv3zTHu4UvFAcSpuOcpNuMWoiDWlrD9QSb3m/OQtbg8BlBCemw730yEXeziBfmup0iCsScRwL35ch4Nr+FydrXBITS9EnfKo8WGyLmTIC4i32FjaCow51TcR6guKJvWtzWZ36Rwqhh8NhQSQt2MHWPLf/umduyj8s+mxXdFOXz11r6V0opdYFjxGeKq1V1NKz4pmrc5YffzveDnCsgZ4T5aLz2yjJ5RC/GKzHLo68WJPCW5HkSIyKVWL1ax6K1YU3Kto+ybJrKPJ5rWIUwPruyZXBQhXN5ad7bAOOZuUwlmuXoxneue4IFqe2qgUz3Gbj9m+ASBDR4WLewODu2rbqhXyLCLweUbtfsVOJpv7RXEefLNEvu2Vk0C+fd/ls1IqQtVKdJVBiV2OO3WkaDXM9GywnlENzkcWj9GC38oRJALrw/zZLD2z/PYTo4vrUGnXWjaNBN6LbA32ypiHQq9E5O+RAsSknoLyEjXI2e5SdEYIBZwVj4ya9vOiHFdy7bA25KX6H1lJF7x+6/Nx9tQh0sNBTHZ1jIBCnxaknHHlqKY4gdNZnrfasM9qMAA/UDSPFKixFx8mXUxvZVTNLNZPw=
+  app: beet-farmer
+  on:
+    repo: linda-le1/beet-farmer

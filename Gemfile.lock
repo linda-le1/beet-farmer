@@ -61,6 +61,7 @@ DEPENDENCIES
   bundler
   pry
   puma
+  rack
   rack-test
   rake
   rspec

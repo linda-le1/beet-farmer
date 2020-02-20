@@ -8,6 +8,7 @@ gem 'rake'
 gem 'bundler'
 gem 'activesupport'
 gem 'rack'
+gem 'sinatra-activerecord'
 
 
 

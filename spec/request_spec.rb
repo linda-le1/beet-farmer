@@ -2,7 +2,7 @@
 # require 'rspec'
 # require 'rack/test'
 # require 'bundler'
-# require_relative '../beet_farmer.rb'
+# require_relative 'beet_farmer.rb'
 require 'pry'
 
 include Rack::Test::Methods
@@ -15,7 +15,7 @@ end
 
 RSpec.describe 'Beet Farmer API' do
   it 'can return a home string' do
-    service = BeetFarmer.new
+    # service = BeetFarmer.new
 
 
   end

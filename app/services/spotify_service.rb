@@ -8,6 +8,29 @@ class SpotifyService
     @token = token
   end
 
+  def combos(mood, cuisine)
+    json = get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=50")
+    json[:playlists][:items].map do |data|
+      Playlist.new(data)
+    end.compact
+  end
+
+  def moods(mood)
+    json = get_json("/v1/search?query=#{mood}&type=playlist&offset=0&limit=50")
+    json[:playlists][:items].map do |data|
+      Playlist.new(data) if data[:owner][:id].include?('spotify')
+    end.compact
+  end
+
+  def cuisines(cuisine)
+    json = get_json("/v1/search?query=#{cuisine}&type=playlist&offset=0&limit=50")
+    json[:playlists][:items].map do |data|
+      Playlist.new(data) if data[:owner][:id].include?('spotify')
+    end.compact
+  end
+
+  private
+
   def get_json(uri)
     response = conn.get(uri)
     JSON.parse(response.body, symbolize_names: true)

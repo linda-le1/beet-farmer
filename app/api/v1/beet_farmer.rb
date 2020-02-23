@@ -23,25 +23,10 @@ class BeetFarmer < Sinatra::Base
     mood_playlists = service.single_query(mood)
     cuisine_playlists = service.single_query(cuisine)
 
-    combo_arr = PlaylistSerializer.jsonify(combo_playlists)
-    mood_arr = PlaylistSerializer.jsonify(mood_playlists)
-    cuisine_arr = PlaylistSerializer.jsonify(cuisine_playlists)
-
-    json = {
-      data: {
-        mood: {
-          type: mood,
-          playlists: mood_arr
-        },
-        cuisine: {
-          type: cuisine,
-          playlists: cuisine_arr
-        },
-        combos: {
-          type: [mood, cuisine],
-          playlists: combo_arr
-        }
-      }
-    }.to_json
+    collection = []
+    collection << PlaylistSerializer.hashify(mood_playlists)
+    collection << PlaylistSerializer.hashify(cuisine_playlists)
+    collection << PlaylistSerializer.hashify(combo_playlists)
+    PlaylistSerializer.jsonify(mood, cuisine, collection)
   end
 end

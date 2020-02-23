@@ -15,4 +15,5 @@ group :test, :development do
   gem 'rack-test'
   gem 'rspec'
   gem 'dotenv'
+  gem 'simplecov'
 end

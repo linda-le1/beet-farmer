@@ -12,15 +12,15 @@ RSpec.describe 'Beet Farmer API' do
 
     expect(last_response).to be_successful
 
-    result = JSON.parse(last_response.body, symbolize_names: true)
+    result = JSON.parse(last_response.body, symbolize_names: true)[:data]
 
-    expect(result[:data][:mood][:type]).to eq 'chill'
-    expect(result[:data][:mood][:playlists].length).to eq 5
+    expect(result[:mood][:type]).to eq 'chill'
+    expect(result[:mood][:playlists].length).to eq 5
 
-    expect(result[:data][:cuisine][:type]).to eq 'italian'
-    expect(result[:data][:cuisine][:playlists].length).to eq 5
+    expect(result[:cuisine][:type]).to eq 'italian'
+    expect(result[:cuisine][:playlists].length).to eq 5
 
-    expect(result[:data][:combos][:type]).to eq ['chill', 'italian']
-    expect(result[:data][:combos][:playlists].length).to eq 5
+    expect(result[:combos][:type]).to eq ['chill', 'italian']
+    expect(result[:combos][:playlists].length).to eq 5
   end
 end

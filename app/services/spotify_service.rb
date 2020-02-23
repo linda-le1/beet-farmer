@@ -8,28 +8,20 @@ class SpotifyService
     @token = token
   end
 
-  def combos(mood, cuisine)
+  def combo_query(mood, cuisine, limit = 5)
     json = get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=50")
     playlists = json[:playlists][:items].map do |data|
       Playlist.new(data)
     end
-    playlists.compact.sample(5)
+    playlists.compact.sample(limit)
   end
 
-  def moods(mood)
-    json = get_json("/v1/search?query=#{mood}&type=playlist&offset=0&limit=50")
+  def single_query(param, limit = 5)
+    json = get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
     playlists = json[:playlists][:items].map do |data|
       Playlist.new(data) if data[:owner][:id].include?('spotify')
     end
-    playlists.compact.sample(5)
-  end
-
-  def cuisines(cuisine)
-    json = get_json("/v1/search?query=#{cuisine}&type=playlist&offset=0&limit=50")
-    playlists = json[:playlists][:items].map do |data|
-      Playlist.new(data) if data[:owner][:id].include?('spotify')
-    end
-    playlists.compact.sample(5)
+    playlists.compact.sample(limit)
   end
 
   private

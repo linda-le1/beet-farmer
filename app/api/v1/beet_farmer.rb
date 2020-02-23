@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'bundler'
-# require 'sinatra/activerecord'
 require 'pry'
 require 'faraday'
 require 'json'
@@ -20,9 +19,9 @@ class BeetFarmer < Sinatra::Base
     mood = 'chill'
     cuisine = 'italian'
 
-    combo_playlists = service.combos(mood, cuisine)
-    mood_playlists = service.moods(mood)
-    cuisine_playlists = service.cuisines(cuisine)
+    combo_playlists = service.combo_query(mood, cuisine)
+    mood_playlists = service.single_query(mood)
+    cuisine_playlists = service.single_query(cuisine)
 
     combo_arr = PlaylistSerializer.jsonify(combo_playlists)
     mood_arr = PlaylistSerializer.jsonify(mood_playlists)

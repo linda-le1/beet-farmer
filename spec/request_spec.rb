@@ -8,19 +8,22 @@ RSpec.describe 'Beet Farmer API' do
   end
 
   it 'can return a recommendation' do
-    get '/api/v1/recommend'
+    mood = 'chill'
+    cuisine = 'italian'
+
+    get "/api/v1/recommend?mood=#{mood}&cuisine=#{cuisine}"
 
     expect(last_response).to be_successful
 
     result = JSON.parse(last_response.body, symbolize_names: true)[:data]
 
-    expect(result[:mood][:type]).to eq 'chill'
+    expect(result[:mood][:type]).to eq mood
     expect(result[:mood][:playlists].length).to eq 5
 
-    expect(result[:cuisine][:type]).to eq 'italian'
+    expect(result[:cuisine][:type]).to eq cuisine
     expect(result[:cuisine][:playlists].length).to eq 5
 
-    expect(result[:combos][:type]).to eq ['chill', 'italian']
+    expect(result[:combos][:type]).to eq ["#{mood}", "#{cuisine}"]
     expect(result[:combos][:playlists].length).to eq 5
   end
 end

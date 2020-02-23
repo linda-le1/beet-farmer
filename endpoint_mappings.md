@@ -1,6 +1,8 @@
+# ENDPOINT MAPPINGS
+
 ## CUISINES:
-* All cuisine endpoints should be returning playlists that are then filtered for spotify
-* All cuisine queries should limit=50 to include enough results to filter for spotify
+#### ** All cuisine endpoints should be returning playlists that are then filtered for spotify
+#### ** All cuisine queries should limit=50 to include enough results to filter for spotify
 
 
 * Italian
@@ -38,8 +40,8 @@
   - returns: 0
 
 * Chinese
-  - param: 'chine'
-  - full endpoint: https://api.spotify.com/v1/search?type=playlist&limit=50&q=chine
+  - param: 'chinese'
+  - full endpoint: https://api.spotify.com/v1/search?type=playlist&limit=50&q=chinese
   - returns: 5
 
 * Japanese
@@ -72,8 +74,8 @@
 
 
 ## MOODS:
-* All mood endpoints should be returning playlists that are then filtered for spotify
-* All mood queries should limit=50 to include enough results to filter for spotify
+#### ** All mood endpoints should be returning playlists that are then filtered for spotify
+#### ** All mood queries should limit=50 to include enough results to filter for spotify
 
 
 * Party
@@ -121,7 +123,7 @@
 
 
 ## COMBO:
-* All combo endpoints should combine the params from cuisine + mood (ie. 'ital&20happy')
-* For cuisine params that have more than one word, use the first word (ie. 'india desi' => 'india&20party')
-* Combo return values should NOT be filtered for spotify - these should return user generated playlists
-* All combo queries should be limited at 10-20 to ensure higher quality - spotify is ranking results by popularity
+#### ** All combo endpoints should combine the params from cuisine + mood (ie. 'ital&20happy')
+#### ** For cuisine params that have more than one word, use the first word (ie. 'india desi' => 'india&20party')
+#### ** Combo return values should NOT be filtered for spotify - these should return user generated playlists
+#### ** All combo queries should be limited at 10-20 to ensure higher quality - spotify is ranking results by popularity

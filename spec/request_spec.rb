@@ -1,22 +1,15 @@
-# ENV['RACK_ENV'] = 'test'
-# require 'rspec'
-# require 'rack/test'
-# require 'bundler'
-# require_relative 'beet_farmer.rb'
-require 'pry'
-
-include Rack::Test::Methods
-
 require 'spec_helper'
-
-def app
-  Sinatra::Application
-end
+require './app/api/v1/beet_farmer'
 
 RSpec.describe 'Beet Farmer API' do
+
+  def app
+    BeetFarmer
+  end
+
   it 'can return a home string' do
-    # service = BeetFarmer.new
+    get '/api/v1/recommend'
 
-
+    expect(last_response).to be_successful
   end
 end

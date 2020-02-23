@@ -17,4 +17,5 @@ group :test, :development do
   gem 'pry'
   gem 'rack-test'
   gem 'rspec'
+  gem 'dotenv'
 end

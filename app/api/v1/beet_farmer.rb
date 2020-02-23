@@ -8,6 +8,7 @@ require 'dotenv/load'
 
 require './app/services/spotify_service'
 require './app/poros/playlist'
+require './app/serializers/playlist_serializer'
 
 Bundler.require
 
@@ -20,22 +21,12 @@ class BeetFarmer < Sinatra::Base
     cuisine = 'italian'
 
     combo_playlists = service.combos(mood, cuisine)
-    combo_arr = []
-    combo_playlists.each do |playlist|
-      combo_arr << {id: playlist.id, name: playlist.name, url: playlist.url}
-    end
-
     mood_playlists = service.moods(mood)
-    mood_arr = []
-    mood_playlists.each do |playlist|
-      mood_arr << {id: playlist.id, name: playlist.name, url: playlist.url}
-    end
-
     cuisine_playlists = service.cuisines(cuisine)
-    cuisine_arr = []
-    cuisine_playlists.each do |playlist|
-      cuisine_arr << {id: playlist.id, name: playlist.name, url: playlist.url}
-    end
+
+    combo_arr = PlaylistSerializer.jsonify(combo_playlists)
+    mood_arr = PlaylistSerializer.jsonify(mood_playlists)
+    cuisine_arr = PlaylistSerializer.jsonify(cuisine_playlists)
 
     json = {
       data: {

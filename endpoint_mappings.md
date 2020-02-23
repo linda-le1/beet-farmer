@@ -1,6 +1,6 @@
 # ENDPOINT MAPPINGS
 
-## CUISINES:
+## CUISINES
 #### * All cuisine endpoints should be returning playlists that are then filtered for spotify
 #### * All cuisine queries should limit=50 to include enough results to filter for spotify
 
@@ -73,7 +73,7 @@
   - difficulty finding decent selection between france/french/paris - returns a lot of artist names (looking into better ways for this one)
 
 
-## MOODS:
+## MOODS
 #### * All mood endpoints should be returning playlists that are then filtered for spotify
 #### * All mood queries should limit=50 to include enough results to filter for spotify
 
@@ -122,7 +122,7 @@
   - 31
 
 
-## COMBO:
+## COMBO
 #### * All combo endpoints should combine the params from cuisine + mood (ie. 'ital&20happy')
 #### * For cuisine params that have more than one word, use the first word (ie. 'india desi' => 'india&20party')
 #### * Combo return values should NOT be filtered for spotify - these should return user generated playlists

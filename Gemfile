@@ -8,11 +8,16 @@ gem 'rake'
 gem 'bundler'
 gem 'activesupport'
 gem 'rack'
-gem 'sinatra-activerecord'
-
+gem 'faraday'
 
 group :test, :development do
   gem 'pry'
   gem 'rack-test'
   gem 'rspec'
+  gem 'dotenv'
+  gem 'simplecov'
 end
+
+# group :test do
+#   gem 'webmock'
+# end

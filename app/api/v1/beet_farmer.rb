@@ -16,12 +16,17 @@ class BeetFarmer < Sinatra::Base
     content_type :json
     service = SpotifyService.new(ENV['SPOTIFY_TOKEN'])
 
-    mood = params["mood"]
-    cuisine = params["cuisine"]
+    # mood = params["mood"]
+    # cuisine = params["cuisine"]
+
+    mood = "chill"
+    cuisine = "italian"
 
     combo_playlists = service.combo_query(mood, cuisine)
     mood_playlists = service.single_query(mood)
     cuisine_playlists = service.single_query(cuisine)
+    # dummy = service.dummy_query
+    # binding.pry
 
     collection = []
     collection << PlaylistSerializer.hashify(mood_playlists)

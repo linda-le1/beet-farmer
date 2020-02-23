@@ -8,11 +8,12 @@ RSpec.describe 'Beet Farmer API' do
   end
 
   it 'can return a recommendation' do
-    mood = 'chill'
-    cuisine = 'italian'
+    # mood = 'chill'
+    # cuisine = 'italian'
 
-    get "/api/v1/recommend?mood=#{mood}&cuisine=#{cuisine}"
+    # uri = "https://api.spotify.com/v1/search?limit=50&offset=0&query=chill%20italian&type=playlist"
 
+    get "/api/v1/recommend"
     expect(last_response).to be_successful
 
     result = JSON.parse(last_response.body, symbolize_names: true)[:data]

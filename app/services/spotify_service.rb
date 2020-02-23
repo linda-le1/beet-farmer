@@ -10,23 +10,26 @@ class SpotifyService
 
   def combos(mood, cuisine)
     json = get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=50")
-    json[:playlists][:items].map do |data|
+    playlists = json[:playlists][:items].map do |data|
       Playlist.new(data)
-    end.compact
+    end
+    playlists.compact.sample(5)
   end
 
   def moods(mood)
     json = get_json("/v1/search?query=#{mood}&type=playlist&offset=0&limit=50")
-    json[:playlists][:items].map do |data|
+    playlists = json[:playlists][:items].map do |data|
       Playlist.new(data) if data[:owner][:id].include?('spotify')
-    end.compact
+    end
+    playlists.compact.sample(5)
   end
 
   def cuisines(cuisine)
     json = get_json("/v1/search?query=#{cuisine}&type=playlist&offset=0&limit=50")
-    json[:playlists][:items].map do |data|
+    playlists = json[:playlists][:items].map do |data|
       Playlist.new(data) if data[:owner][:id].include?('spotify')
-    end.compact
+    end
+    playlists.compact.sample(5)
   end
 
   private

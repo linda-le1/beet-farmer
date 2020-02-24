@@ -3,7 +3,7 @@ require 'bundler'
 # require 'pry'
 require 'faraday'
 require 'json'
-require 'dotenv/load'
+# require 'dotenv/load'
 
 require './app/services/spotify_service'
 require './app/poros/playlist'

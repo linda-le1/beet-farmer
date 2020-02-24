@@ -46,7 +46,7 @@ class SpotifyService
 
   def filter_by_spotify(json)
     json[:playlists][:items].map do |data|
-      Playlist.new(data) if by_spotify(data)
+      Playlist.new(data) if by_spotify?(data)
     end
   end
 

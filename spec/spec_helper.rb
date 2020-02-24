@@ -13,7 +13,6 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.configure_rspec_metadata!
   config.filter_sensitive_data("<SPOTIFY_TOKEN>") { ENV['SPOTIFY_TOKEN'] }
-  config.filter_sensitive_data("<SPOTIFY_REFRESH_TOKEN>") { ENV['SPOTIFY_REFRESH_TOKEN'] }
   config.allow_http_connections_when_no_cassette = true
 end
 

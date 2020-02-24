@@ -14,24 +14,19 @@ Bundler.require
 class BeetFarmer < Sinatra::Base
   get('/api/v1/recommend') do
     content_type :json
-    service = SpotifyService.new(ENV['SPOTIFY_TOKEN'])
 
-    # mood = params["mood"]
-    # cuisine = params["cuisine"]
+    mood = params["mood"]
+    cuisine = params["cuisine"]
+    token = params["token"]
 
-    mood = "chill"
-    cuisine = "italian"
+    service = SpotifyService.new(token)
 
-    combo_playlists = service.combo_query(mood, cuisine)
-    mood_playlists = service.single_query(mood)
-    cuisine_playlists = service.single_query(cuisine)
-    # dummy = service.dummy_query
-    # binding.pry
+    collection = {
+      combos: service.combo_query(mood, cuisine),
+      moods: service.single_query(mood),
+      cuisines: service.single_query(cuisine)
+    }
 
-    collection = []
-    collection << PlaylistSerializer.hashify(mood_playlists)
-    collection << PlaylistSerializer.hashify(cuisine_playlists)
-    collection << PlaylistSerializer.hashify(combo_playlists)
     PlaylistSerializer.jsonify(mood, cuisine, collection)
   end
 end

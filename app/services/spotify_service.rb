@@ -15,24 +15,44 @@ class SpotifyService
 
   def single_query(param, limit = 5)
     if param == 'greek'
-      json = get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")
-      playlists = objectify(json)
+      playlists = greek_query
     elsif param == 'french'
-      json = get_json("/v1/search?query=french%20dinner&type=playlist&offset=0&limit=10")
-      playlists = objectify(json)
+      playlists = french_query
     elsif param == 'romantic'
-      json = get_json("/v1/search?query=date%night&type=playlist&offset=0&limit=50")
-      playlists = objectify(json)
+      playlists = romantic_query
     else
       json = get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
-      playlists = json[:playlists][:items].map do |data|
-        Playlist.new(data) if data[:owner][:id].include?('spotify')
-      end
+      playlists = filter_by_spotify(json)
     end
     playlists.compact.sample(limit)
   end
 
   private
+
+  def greek_query
+    json = get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")
+    objectify(json)
+  end
+
+  def french_query
+    json = get_json("/v1/search?query=french%20dinner&type=playlist&offset=0&limit=10")
+    objectify(json)
+  end
+
+  def romantic_query
+    json = get_json("/v1/search?query=date%night&type=playlist&offset=0&limit=50")
+    objectify(json)
+  end
+
+  def filter_by_spotify(json)
+    json[:playlists][:items].map do |data|
+      Playlist.new(data) if by_spotify?(data)
+    end
+  end
+
+  def by_spotify?(data)
+    data[:owner][:id].include?('spotify')
+  end
 
   def objectify(json)
     playlists = json[:playlists][:items].map do |data|

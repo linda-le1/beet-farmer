@@ -12,15 +12,15 @@ class PlaylistSerializer
       data: {
         mood: {
           type: mood,
-          playlists: collection[0]
+          playlists: hashify(collection[:combos])
         },
         cuisine: {
           type: cuisine,
-          playlists: collection[1]
+          playlists: hashify(collection[:moods])
         },
         combos: {
           type: [mood, cuisine],
-          playlists: collection[2]
+          playlists: hashify(collection[:cuisines])
         }
       }
     }.to_json

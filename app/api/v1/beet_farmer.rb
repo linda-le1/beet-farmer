@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'bundler'
-require 'pry'
+# require 'pry'
 require 'faraday'
 require 'json'
 require 'dotenv/load'

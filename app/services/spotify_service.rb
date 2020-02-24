@@ -22,7 +22,7 @@ class SpotifyService
       playlists = romantic_query
     else
       json = get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
-      playlists = filter_by_spotify(json)
+      playlists = filter_by_spotify?(json)
     end
     playlists.compact.sample(limit)
   end

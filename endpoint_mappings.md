@@ -16,7 +16,7 @@
   - returns: 26
 
 * Indian
-  - param: 'india desi' / 'india&20desi'
+  - param: 'india&20desi'
   - full endpoint: https://api.spotify.com/v1/search?type=playlist&limit=50&q=india&20desi
   - returns: 41
 
@@ -31,13 +31,8 @@
   - returns: 4
 
 * Greek
-  - param: 'greece'
-  - full endpoint: https://api.spotify.com/v1/search?type=playlist&limit=50&q=greece
-  - returns: 2
-  (looking for ways to expand)
-  - param: 'greek dinner' / 'greek&20dinner'
-  - full endpoint: https://api.spotify.com/v1/search?type=playlist&limit=50&q=greek&20dinner
-  - returns: 0
+  - param: 'greek'
+  - edge case, running conditional to get more results
 
 * Chinese
   - param: 'chinese'
@@ -70,7 +65,8 @@
   - 7
 
 * French (?)
-  - difficulty finding decent selection between france/french/paris - returns a lot of artist names (looking into better ways for this one)
+  - param: 'french'
+  - edge case, running conditional to get more results
 
 
 ## MOODS
@@ -109,7 +105,8 @@
   - 37
 
 * Romantic
-  - still working out the best solution here
+  - param: 'romantic'
+  - edge case, running conditional to get more results
 
 * Folksy
   - param: 'folk'
@@ -120,6 +117,9 @@
   - param: 'sunshine'
   - https://api.spotify.com/v1/search?type=playlist&limit=50&q=summer
   - 31
+
+* Frisky
+  - TBD (still in progress)
 
 
 ## COMBO

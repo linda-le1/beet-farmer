@@ -15,7 +15,7 @@ class QueryParser
     when 'romantic'
       mood_array.map { |data| Playlist.new(data) }
     else
-      mood_array.map {|data| Playlist.new(data) if owner_spotify?(data) }
+      mood_array.map { |data| Playlist.new(data) if owner_spotify?(data) }
     end.compact.sample(limit)
   end
 

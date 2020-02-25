@@ -1,7 +1,7 @@
 require './app/services/spotify_service'
 require './app/poros/playlist'
 
-class QueryParser
+class Recommendation
   attr_reader :params, :mood, :cuisine
 
   def initialize(params)

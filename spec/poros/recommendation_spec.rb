@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'dotenv/load'
-require './app/parsers/query_parser.rb'
+require './app/poros/recommendation'
 
-describe "Query Parser", :vcr do
+describe "Recommendation", :vcr do
   it 'returns the correct number of playlist objects' do
     params = {
       token: ENV['SPOTIFY_TOKEN'],
@@ -10,11 +10,11 @@ describe "Query Parser", :vcr do
       cuisine: 'italian'
     }
 
-    query = QueryParser.new(params)
+    recommendation = Recommendation.new(params)
 
-    mood_playlists = query.mood_playlists
-    cuisine_playlists = query.cuisine_playlists
-    combo_playlists = query.combo_playlists
+    mood_playlists = recommendation.mood_playlists
+    cuisine_playlists = recommendation.cuisine_playlists
+    combo_playlists = recommendation.combo_playlists
 
     expect(mood_playlists.length).to eq 5
     expect(cuisine_playlists.length).to eq 5

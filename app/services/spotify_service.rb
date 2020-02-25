@@ -2,62 +2,54 @@ require 'faraday'
 # require 'dotenv/load'
 
 class SpotifyService
-  attr_reader :token
+  attr_reader :token, :mood, :cuisine
 
-  def initialize(token)
-    @token = token
+  def initialize(params)
+    @token = params[:token]
+    @mood = params[:mood]
+    @cuisine = params[:cuisine]
   end
 
-  def combo_query(mood, cuisine, limit = 5)
-    json = get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
-    objectify(json).compact.sample(limit)
+  def combo_query
+    get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
   end
 
-  def single_query(param, limit = 5)
-    if param == 'greek'
-      playlists = greek_query
-    elsif param == 'french'
-      playlists = french_query
-    elsif param == 'romantic'
-      playlists = romantic_query
+  def mood_query
+    case mood
+    when 'romantic'
+      romantic_query
     else
-      json = get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
-      playlists = filter_by_spotify(json)
+      single_query(mood)
     end
-    playlists.compact.sample(limit)
+  end
+
+  def cuisine_query
+    case cuisine
+    when 'greek'
+      greek_query
+    when 'french'
+      french_query
+    else
+      single_query(cuisine)
+    end
   end
 
   private
 
+  def single_query(param)
+    get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
+  end
+
   def greek_query
-    json = get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")
-    objectify(json)
+    get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")
   end
 
   def french_query
-    json = get_json("/v1/search?query=french%20dinner&type=playlist&offset=0&limit=10")
-    objectify(json)
+    get_json("/v1/search?query=french%20dinner&type=playlist&offset=0&limit=10")
   end
 
   def romantic_query
-    json = get_json("/v1/search?query=date%night&type=playlist&offset=0&limit=50")
-    objectify(json)
-  end
-
-  def filter_by_spotify(json)
-    json[:playlists][:items].map do |data|
-      Playlist.new(data) if by_spotify?(data)
-    end
-  end
-
-  def by_spotify?(data)
-    data[:owner][:id].include?('spotify')
-  end
-
-  def objectify(json)
-    playlists = json[:playlists][:items].map do |data|
-      Playlist.new(data)
-    end
+    get_json("/v1/search?query=date%night&type=playlist&offset=0&limit=50")
   end
 
   def get_json(uri)

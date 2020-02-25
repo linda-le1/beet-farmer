@@ -1,5 +1,5 @@
 class Playlist
-  attr_reader :id, :name, :url
+  attr_reader :id, :name, :url, :owner
 
   def initialize(data)
     @name = data[:name]

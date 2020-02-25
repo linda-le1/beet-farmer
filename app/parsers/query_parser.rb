@@ -11,42 +11,42 @@ class QueryParser
   end
 
   def mood_playlists
-    case mood
-    when 'romantic'
-      service.mood_query[:playlists][:items].map do |data|
-        Playlist.new(data)
-      end.compact.sample(limit)
+    if mood == 'romantic'
+      mood_array.map { |data| Playlist.new(data) }
     else
-      service.mood_query[:playlists][:items].map do |data|
-        Playlist.new(data) if data[:owner][:id] == ('spotify' || 'spotifycharts')
-      end.compact.sample(limit)
-    end
-  end
-
-  def cuisine_playlists
-    case cuisine
-    when 'greek'
-      service.cuisine_query[:playlists][:items].map do |data|
-        Playlist.new(data)
-      end.compact.sample(limit)
-    when 'french'
-      service.cuisine_query[:playlists][:items].map do |data|
-        Playlist.new(data)
-      end.compact.sample(limit)
-    else
-      service.cuisine_query[:playlists][:items].map do |data|
-        Playlist.new(data) if data[:owner][:id] == ('spotify' || 'spotifycharts')
-      end.compact.sample(limit)
-    end
-  end
-
-  def combo_playlists
-    service.combo_query[:playlists][:items].map do |data|
-      Playlist.new(data)
+      mood_array.map {|data| Playlist.new(data) if owner_spotify?(data) }
     end.compact.sample(limit)
   end
 
+  def cuisine_playlists
+    if cuisine == 'greek' || cuisine == 'french'
+      cuisine_array.map { |data| Playlist.new(data) }
+    else
+      cuisine_array.map { |data| Playlist.new(data) if owner_spotify?(data) }
+    end.compact.sample(limit)
+  end
+
+  def combo_playlists
+    combos_array.map { |data| Playlist.new(data) }.compact.sample(limit)
+  end
+
   private
+
+  def mood_array
+    service.mood_query[:playlists][:items]
+  end
+
+  def cuisine_array
+    service.cuisine_query[:playlists][:items]
+  end
+
+  def combos_array
+    service.combo_query[:playlists][:items]
+  end
+
+  def owner_spotify?(data)
+    data[:owner][:id] == ('spotify' || 'spotifycharts')
+  end
 
   def service
     return @service if @service

@@ -2,7 +2,7 @@ class RecommendationSerializer
 
   def self.parse(playlist)
     playlist.reduce([]) do |acc, playlist|
-      acc << {id: playlist.id, name: playlist.name, url: playlist.url}
+      acc << {id: playlist.id, name: playlist.name, widget_url: playlist.url}
       acc
     end
   end
@@ -11,15 +11,15 @@ class RecommendationSerializer
     {
       data: {
         mood: {
-          type: recommendation.mood,
+          type: recommendation.mood.capitalize,
           playlists: parse(recommendation.mood_playlists)
         },
         cuisine: {
-          type: recommendation.cuisine,
+          type: recommendation.cuisine.capitalize,
           playlists: parse(recommendation.cuisine_playlists)
         },
         combos: {
-          type: [recommendation.mood, recommendation.cuisine],
+          type: [recommendation.mood.capitalize, recommendation.cuisine.capitalize],
           playlists: parse(recommendation.combo_playlists)
         }
       }

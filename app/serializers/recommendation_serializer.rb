@@ -8,21 +8,18 @@ class RecommendationSerializer
   end
 
   def self.jsonify(recommendation)
-    mood = recommendation.params[:mood]
-    cuisine = recommendation.params[:cuisine]
-
     {
       data: {
         mood: {
-          type: mood,
+          type: recommendation.mood,
           playlists: parse(recommendation.mood_playlists)
         },
         cuisine: {
-          type: cuisine,
+          type: recommendation.cuisine,
           playlists: parse(recommendation.cuisine_playlists)
         },
         combos: {
-          type: [mood, cuisine],
+          type: [recommendation.mood, recommendation.cuisine],
           playlists: parse(recommendation.combo_playlists)
         }
       }

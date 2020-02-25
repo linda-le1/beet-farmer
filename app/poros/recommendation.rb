@@ -13,26 +13,34 @@ class Recommendation
   def mood_playlists
     case mood
     when 'romantic'
-      mood_array.map { |data| Playlist.new(data) }
+      select_all(mood_array)
     else
-      mood_array.map { |data| Playlist.new(data) if owner_spotify?(data) }
+      select_spotify(mood_array)
     end.compact.sample(limit)
   end
 
   def cuisine_playlists
     case cuisine
     when 'greek', 'french'
-      cuisine_array.map { |data| Playlist.new(data) }
+      select_all(cuisine_array)
     else
-      cuisine_array.map { |data| Playlist.new(data) if owner_spotify?(data) }
+      select_spotify(cuisine_array)
     end.compact.sample(limit)
   end
 
   def combo_playlists
-    combos_array.map { |data| Playlist.new(data) }.compact.sample(limit)
+    select_all(combos_array).compact.sample(limit)
   end
 
   private
+
+  def select_all(array)
+    array.map { |data| Playlist.new(data) }
+  end
+
+  def select_spotify(array)
+    array.map { |data| Playlist.new(data) if owner_spotify?(data) }
+  end
 
   def mood_array
     service.mood_query[:playlists][:items]

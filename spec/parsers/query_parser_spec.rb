@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'dotenv/load'
 require './app/parsers/query_parser.rb'
 
-describe "Query Parser" do
+describe "Query Parser", :vcr do
   it 'returns the correct number of playlist objects' do
     params = {
       token: ENV['SPOTIFY_TOKEN'],

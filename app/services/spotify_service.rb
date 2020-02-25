@@ -19,7 +19,7 @@ class SpotifyService
     when 'romantic'
       romantic_query
     else
-      get_json("/v1/search?query=#{mood}&type=playlist&offset=0&limit=50")
+      single_query(mood)
     end
   end
 
@@ -30,11 +30,15 @@ class SpotifyService
     when 'french'
       french_query
     else
-      get_json("/v1/search?query=#{cuisine}&type=playlist&offset=0&limit=50")
+      single_query(cuisine)
     end
   end
 
   private
+
+  def single_query(param)
+    get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
+  end
 
   def greek_query
     get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")

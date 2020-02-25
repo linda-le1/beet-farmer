@@ -1,13 +1,13 @@
 require 'spec_helper'
 require './app/api/v1/beet_farmer'
 
-RSpec.describe 'Beet Farmer API' do
+RSpec.describe 'Beet Farmer API', :vcr do
 
   def app
     BeetFarmer
   end
 
-  it 'can return a recommendation based on params', :vcr do
+  it 'can return a recommendation based on params' do
     mood = 'romantic'
     cuisine = 'french'
     token = ENV['SPOTIFY_TOKEN']
@@ -27,7 +27,7 @@ RSpec.describe 'Beet Farmer API' do
     expect(result[:combos][:playlists].length).to eq 5
   end
 
-  it 'can return a recommendation based on different params', :vcr do
+  it 'can return a recommendation based on different params' do
     mood = 'chill'
     cuisine = 'greek'
     token = ENV['SPOTIFY_TOKEN']
@@ -47,7 +47,7 @@ RSpec.describe 'Beet Farmer API' do
     expect(result[:combos][:playlists].length).to eq 5
   end
 
-  it 'can return another recommendation based on another set of params', :vcr do
+  it 'can return another recommendation based on another set of params' do
     mood = 'sad'
     cuisine = 'ital'
     token = ENV['SPOTIFY_TOKEN']

@@ -11,7 +11,8 @@ class QueryParser
   end
 
   def mood_playlists
-    if mood == 'romantic'
+    case mood
+    when 'romantic'
       mood_array.map { |data| Playlist.new(data) }
     else
       mood_array.map {|data| Playlist.new(data) if owner_spotify?(data) }
@@ -19,7 +20,8 @@ class QueryParser
   end
 
   def cuisine_playlists
-    if cuisine == 'greek' || cuisine == 'french'
+    case cuisine
+    when 'greek', 'french'
       cuisine_array.map { |data| Playlist.new(data) }
     else
       cuisine_array.map { |data| Playlist.new(data) if owner_spotify?(data) }

@@ -23,7 +23,7 @@ RSpec.describe 'Beet Farmer API', :vcr do
     expect(result[:cuisine][:type]).to eq cuisine.capitalize
     expect(result[:cuisine][:playlists].length).to eq 5
 
-    expect(result[:combos][:type]).to eq ["#{mood.capitalize}", "#{cuisine.capitalize}"]
+    expect(result[:combos][:type]).to eq mood.capitalize + " " + cuisine.capitalize
     expect(result[:combos][:playlists].length).to eq 5
   end
 
@@ -43,7 +43,7 @@ RSpec.describe 'Beet Farmer API', :vcr do
     expect(result[:cuisine][:type]).to eq cuisine.capitalize
     expect(result[:cuisine][:playlists].length).to eq 5
 
-    expect(result[:combos][:type]).to eq ["#{mood.capitalize}", "#{cuisine.capitalize}"]
+    expect(result[:combos][:type]).to eq mood.capitalize + " " + cuisine.capitalize
     expect(result[:combos][:playlists].length).to eq 5
   end
 
@@ -63,7 +63,7 @@ RSpec.describe 'Beet Farmer API', :vcr do
     expect(result[:cuisine][:type]).to eq cuisine.capitalize
     expect(result[:cuisine][:playlists].length).to eq 5
 
-    expect(result[:combos][:type]).to eq ["#{mood.capitalize}", "#{cuisine.capitalize}"]
+    expect(result[:combos][:type]).to eq mood.capitalize + " " + cuisine.capitalize
     expect(result[:combos][:playlists].length).to eq 5
   end
 end

@@ -2,25 +2,25 @@ class RecommendationSerializer
 
   def self.parse(playlist)
     playlist.reduce([]) do |acc, playlist|
-      acc << {id: playlist.id, name: playlist.name, widget_url: playlist.url}
+      acc << {id: playlist.id, name: playlist.name}
       acc
     end
   end
 
-  def self.jsonify(recommendation)
+  def self.jsonify(rec)
     {
       data: {
         mood: {
-          type: recommendation.mood.capitalize,
-          playlists: parse(recommendation.mood_playlists)
+          type: rec.mood.capitalize,
+          playlists: parse(rec.mood_playlists)
         },
         cuisine: {
-          type: recommendation.cuisine.capitalize,
-          playlists: parse(recommendation.cuisine_playlists)
+          type: rec.cuisine.capitalize,
+          playlists: parse(rec.cuisine_playlists)
         },
         combos: {
-          type: [recommendation.mood.capitalize, recommendation.cuisine.capitalize],
-          playlists: parse(recommendation.combo_playlists)
+          type: rec.mood.capitalize + " " + rec.cuisine.capitalize,
+          playlists: parse(rec.combo_playlists)
         }
       }
     }.to_json

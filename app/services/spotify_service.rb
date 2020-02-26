@@ -47,7 +47,7 @@ class SpotifyService
   end
 
   def single_query(param)
-    get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
+    get_json("/v1/search?query=#{param}&type=playlist&limit=50")
   end
 
   def get_json(uri)

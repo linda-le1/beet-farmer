@@ -5,6 +5,6 @@ class Playlist
     @name = data[:name]
     @id = data[:id]
     @owner = data[:owner][:id]
-    @url = data[:external_urls][:spotify]
+    @url = "https://open.spotify.com/embed/playlist/#{data[:id]}"
   end
 end

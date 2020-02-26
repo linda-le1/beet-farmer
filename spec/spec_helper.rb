@@ -6,6 +6,7 @@ require 'vcr'
 require 'webmock/rspec'
 require 'simplecov'
 require 'pry'
+require 'dotenv/load'
 SimpleCov.start
 
 VCR.configure do |config|

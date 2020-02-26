@@ -11,45 +11,43 @@ class SpotifyService
   end
 
   def combo_query
-    get_json("/v1/search?query=#{mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
+    get_json("/v1/search?query=#{single_mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
   end
 
   def mood_query
-    case mood
-    when 'romantic'
-      romantic_query
-    else
-      single_query(mood)
-    end
+    single_query(single_mood)
   end
 
   def cuisine_query
-    case cuisine
-    when 'greek'
-      greek_query
-    when 'french'
-      french_query
-    else
-      single_query(cuisine)
-    end
+    single_query(single_cuisine)
   end
 
   private
 
+  def single_mood
+    return 'jazz'       if mood == 'jazzy'
+    return 'sad'        if mood == 'glum'
+    return 'classical'  if mood == 'classy'
+    return 'folk'       if mood == 'folksy'
+    return 'summer'     if mood == 'sunny'
+    return 'romance'    if mood == 'romantic'
+    return mood
+  end
+
+  def single_cuisine
+    return 'ital'             if cuisine == 'italian'
+    return 'mexi'             if cuisine == 'mexican'
+    return 'india%20desi'     if cuisine == 'indian'
+    return 'america'          if cuisine == 'american'
+    return 'japan'            if cuisine == 'japanese'
+    return 'viet'             if cuisine == 'vietnamese'
+    return 'greek%20dinner'   if cuisine == 'greek'
+    return 'french%20dinner'  if cuisine == 'french'
+    return cuisine
+  end
+
   def single_query(param)
     get_json("/v1/search?query=#{param}&type=playlist&offset=0&limit=50")
-  end
-
-  def greek_query
-    get_json("/v1/search?query=greek%20dinner&type=playlist&offset=0&limit=10")
-  end
-
-  def french_query
-    get_json("/v1/search?query=french%20dinner&type=playlist&offset=0&limit=10")
-  end
-
-  def romantic_query
-    get_json("/v1/search?query=date%night&type=playlist&offset=0&limit=50")
   end
 
   def get_json(uri)

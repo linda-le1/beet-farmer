@@ -55,7 +55,7 @@ class Recommendation
   end
 
   def owner_spotify?(data)
-    data[:owner][:id] == ('spotify' || 'spotifycharts')
+    data[:owner][:id] == 'spotify' || data[:owner][:id] == 'spotifycharts'
   end
 
   def service

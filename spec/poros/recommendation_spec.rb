@@ -21,11 +21,11 @@ describe "Recommendation", :vcr do
     expect(combo_playlists.length).to eq 5
 
     mood_playlists.each do |playlist|
-      expect(playlist.owner).to eq('spotify' || 'spotifycharts')
+      expect(playlist.owner).to include('spotify')
     end
 
     cuisine_playlists.each do |playlist|
-      expect(playlist.owner).to eq('spotify' || 'spotifycharts')
+      expect(playlist.owner).to include('spotify')
     end
   end
 end

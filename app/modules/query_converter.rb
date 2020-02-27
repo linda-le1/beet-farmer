@@ -1,12 +1,12 @@
 module QueryConverter
   def single_mood
-    return 'jazz'           if mood == 'jazzy'
-    return 'sad'            if mood == 'glum'
-    return 'classical'      if mood == 'classy'
-    return 'folk'           if mood == 'folksy'
-    return 'summer'         if mood == 'sunny'
-    return 'romance'        if mood == 'romantic'
-    return 'sex%20sheets'   if mood == 'frisky'
+    return 'jazz'       if mood == 'jazzy'
+    return 'sad'        if mood == 'glum'
+    return 'classical'  if mood == 'classy'
+    return 'folk'       if mood == 'folksy'
+    return 'summer'     if mood == 'sunny'
+    return 'romance'    if mood == 'romantic'
+    return 'sexy'       if mood == 'frisky'
     return mood
   end
 

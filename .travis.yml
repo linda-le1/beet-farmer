@@ -1,10 +1,11 @@
 language: ruby
 rvm:
 - 2.5.1
+services:
+- redis-server
 before_install:
 - gem install bundler -v 2.1.4
 script:
-- redis-server
 - bundle exec rspec
 deploy:
   provider: heroku

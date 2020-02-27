@@ -1,7 +1,7 @@
 require 'spec_helper'
 require './app/api/v1/beet_farmer'
 
-RSpec.describe 'Beet Farmer API', :vcr do
+RSpec.describe 'Beet Farmer API' do
 
   def app
     BeetFarmer

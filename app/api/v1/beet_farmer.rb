@@ -10,6 +10,12 @@ require './app/serializers/recommendation_serializer'
 
 Bundler.require
 
+configure do
+  require 'redis'
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+end
+
 class BeetFarmer < Sinatra::Base
   get('/api/v1/recommend') do
     content_type :json

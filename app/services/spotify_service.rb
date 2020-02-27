@@ -1,7 +1,9 @@
 require 'faraday'
+require './app/modules/query_converter'
 # require 'dotenv/load'
 
 class SpotifyService
+  include QueryConverter
   attr_reader :token, :mood, :cuisine
 
   def initialize(params)
@@ -23,28 +25,6 @@ class SpotifyService
   end
 
   private
-
-  def single_mood
-    return 'jazz'       if mood == 'jazzy'
-    return 'sad'        if mood == 'glum'
-    return 'classical'  if mood == 'classy'
-    return 'folk'       if mood == 'folksy'
-    return 'summer'     if mood == 'sunny'
-    return 'romance'    if mood == 'romantic'
-    return mood
-  end
-
-  def single_cuisine
-    return 'ital'             if cuisine == 'italian'
-    return 'mexi'             if cuisine == 'mexican'
-    return 'india%20desi'     if cuisine == 'indian'
-    return 'america'          if cuisine == 'american'
-    return 'japan'            if cuisine == 'japanese'
-    return 'viet'             if cuisine == 'vietnamese'
-    return 'greek%20dinner'   if cuisine == 'greek'
-    return 'french%20dinner'  if cuisine == 'french'
-    return cuisine
-  end
 
   def single_query(param)
     get_json("/v1/search?query=#{param}&type=playlist&limit=50")

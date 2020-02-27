@@ -59,8 +59,7 @@ class Recommendation
   end
 
   def service
-    return @service if @service
-    @service = SpotifyService.new(params)
+    @service ||= SpotifyService.new(params)
   end
 
   def limit

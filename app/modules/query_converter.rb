@@ -6,6 +6,7 @@ module QueryConverter
     return 'folk'       if mood == 'folksy'
     return 'summer'     if mood == 'sunny'
     return 'romance'    if mood == 'romantic'
+    return 'sex'        if mood == 'frisky'
     return mood
   end
 

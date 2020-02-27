@@ -19,6 +19,5 @@ describe "Spotify Service", :vcr do
     expect(combo_hash.length).to eq 25
     expect(mood_hash.length).to eq 50
     expect(cuisine_hash.length).to eq 50
-
   end
 end

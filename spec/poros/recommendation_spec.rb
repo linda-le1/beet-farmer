@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'dotenv/load'
 require './app/poros/recommendation'
 
-describe "Recommendation", :vcr do
+describe "Recommendation" do
   it 'returns the correct number of playlist objects' do
     params = {
       token: ENV['SPOTIFY_TOKEN'],

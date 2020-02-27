@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'dotenv/load'
 require './app/services/spotify_service.rb'
 
-describe "Spotify Service", :vcr do
+describe "Spotify Service" do
   it 'returns the correct number of playlists' do
     params = {
       token: ENV['SPOTIFY_TOKEN'],
@@ -19,6 +19,5 @@ describe "Spotify Service", :vcr do
     expect(combo_hash.length).to eq 25
     expect(mood_hash.length).to eq 50
     expect(cuisine_hash.length).to eq 50
-
   end
 end

@@ -13,42 +13,18 @@ class SpotifyService
   end
 
   def combo_query
-    redis_key = "#{mood} #{cuisine}"
-    redis = Redis.new
-    if redis.get(redis_key)
-      eval(redis.get(redis_key))
-    else
-      combo = get_json("/v1/search?query=#{single_mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
-      redis.set(redis_key, combo, ex: cache_expire)
-      combo
-    end
+    get_json("/v1/search?query=#{single_mood}%20#{cuisine}&type=playlist&offset=0&limit=25")
   end
 
   def mood_query
-    redis = Redis.new
-    if redis.get(mood)
-      eval(redis.get(mood))
-    else
-      redis.set(mood, single_query(single_mood), ex: cache_expire)
-      single_query(single_mood)
-    end
+    single_query(single_mood)
   end
 
   def cuisine_query
-    redis = Redis.new
-    if redis.get(cuisine)
-      eval(redis.get(cuisine))
-    else
-      redis.set(cuisine, single_query(single_cuisine), ex: cache_expire)
-      single_query(single_cuisine)
-    end
+    single_query(single_cuisine)
   end
 
   private
-
-  def cache_expire
-    60*60*24
-  end
 
   def single_query(param)
     get_json("/v1/search?query=#{param}&type=playlist&limit=50")

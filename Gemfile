@@ -9,6 +9,7 @@ gem 'bundler'
 gem 'activesupport'
 gem 'rack'
 gem 'faraday'
+gem 'redis'
 
 group :test, :development do
   gem 'pry'

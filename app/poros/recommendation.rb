@@ -12,7 +12,7 @@ class Recommendation
 
   def mood_playlists
     case mood
-    when 'romantic'
+    when 'romantic', 'frisky'
       select_all(mood_array)
     else
       select_spotify(mood_array)
